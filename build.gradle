@@ -5,18 +5,28 @@ apply plugin: 'groovy'
 
 sourceSets {
     main {
+        java {
+            srcDirs = []
+        }
         groovy {
-            'src/main/java'
-            'src/main/groovy'
+            srcDirs = [
+                'src/main/java',
+                'src/main/groovy'
+            ]
         }
         resources {
             'src/main/resources'
         }
     }
     test {
+        java {
+            srcDirs = []
+        }
         groovy {
-            'src/test/java'
-            'src/test/groovy'
+            srcDirs = [
+                'src/test/java',
+                'src/test/groovy'
+            ]
         }
         resources {
             'src/test/resources'
