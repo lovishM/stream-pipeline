@@ -1,17 +1,13 @@
 group = 'element.core'
 version = 'SNAPSHOT'
 
-apply plugin: 'groovy'
+apply plugin: 'java'
 
 sourceSets {
     main {
         java {
-            srcDirs = []
-        }
-        groovy {
             srcDirs = [
-                'src/main/java',
-                'src/main/groovy'
+                'src/main/java'
             ]
         }
         resources {
@@ -20,20 +16,12 @@ sourceSets {
     }
     test {
         java {
-            srcDirs = []
-        }
-        groovy {
             srcDirs = [
-                'src/test/java',
-                'src/test/groovy'
+                'src/test/java'
             ]
         }
         resources {
             'src/test/resources'
         }
     }
-}
-
-dependencies {
-    compile localGroovy()
 }
