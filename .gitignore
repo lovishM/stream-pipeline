@@ -1,0 +1,9 @@
+*.log
+*.txt
+
+.gradle
+.idea
+
+gradle
+gradlew*
+
