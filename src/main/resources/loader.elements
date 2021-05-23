@@ -1,8 +1,0 @@
-elements {
-    name "aqua"
-    apply from: "some file path"
-
-    after execute: {
-        println "I'm part of the lifecycle"
-    }
-}
