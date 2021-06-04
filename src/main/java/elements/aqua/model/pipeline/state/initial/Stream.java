@@ -1,7 +1,7 @@
 package elements.aqua.model.pipeline.state.initial;
 
-import elements.aqua.model.pipeline.IModel;
 import elements.aqua.core.ComplexPipeline;
+import elements.aqua.model.pipeline.IModel;
 
 import java.util.Iterator;
 

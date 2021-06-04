@@ -5,7 +5,6 @@ import elements.aqua.model.pipeline.operation.Transform;
 import elements.aqua.model.pipeline.state.initial.Stream;
 import elements.aqua.model.pipeline.state.terminal.Print;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

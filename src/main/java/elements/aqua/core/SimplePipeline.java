@@ -6,7 +6,6 @@ import elements.aqua.model.pipeline.operation.Transform;
 import elements.aqua.model.pipeline.state.initial.InitialState;
 import elements.aqua.model.pipeline.state.terminal.ITerminal;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
