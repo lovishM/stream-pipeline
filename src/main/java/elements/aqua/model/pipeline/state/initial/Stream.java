@@ -1,6 +1,7 @@
 package elements.aqua.model.pipeline.state.initial;
 
 import elements.aqua.model.pipeline.IModel;
+import elements.aqua.core.ComplexPipeline;
 
 import java.util.Iterator;
 
@@ -13,6 +14,10 @@ public class Stream<K> implements IModel, InitialState<K> {
 
     public static <F, T extends Iterable<F>> Stream<F> of(T o) {
         return new Stream<>(o.iterator());
+    }
+
+    public static <F, T extends Iterable<F>> ComplexPipeline<F> toPipeline(T o) {
+        return ComplexPipeline.createPipe(new Stream<>(o.iterator()));
     }
 
     @Override

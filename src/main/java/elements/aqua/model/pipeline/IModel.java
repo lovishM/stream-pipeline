@@ -9,6 +9,6 @@ public interface IModel {
     }
 
     enum Type {
-        INIT_STATE, FILTER, CONVERTOR, TERMINAL_STATE;
+        INIT_STATE, FILTER, TRANSFORM, TERMINAL_STATE
     }
 }

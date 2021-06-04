@@ -1,4 +1,4 @@
-package elements.aqua.model.pipeline.transformer;
+package elements.aqua.model.pipeline.operation;
 
 import elements.aqua.model.pipeline.IModel;
 

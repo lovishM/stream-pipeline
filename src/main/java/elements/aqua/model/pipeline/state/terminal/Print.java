@@ -26,8 +26,12 @@ public class Print<T> implements IModel, ITerminal<T> {
     public Type type() { return Type.TERMINAL_STATE; }
 
     @Override
-    public void consume(T data) throws IOException {
-        appendable.append(data.toString());
-        appendable.append(recordSeparator);
+    public void consume(T data) {
+        try {
+            appendable.append(data.toString());
+            appendable.append(recordSeparator);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
