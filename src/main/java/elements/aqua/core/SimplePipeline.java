@@ -1,35 +1,37 @@
 package elements.aqua.core;
 
 import elements.aqua.model.pipeline.IModel;
+import elements.aqua.model.pipeline.operation.Filter;
+import elements.aqua.model.pipeline.operation.Transform;
 import elements.aqua.model.pipeline.state.initial.InitialState;
 import elements.aqua.model.pipeline.state.terminal.ITerminal;
-import elements.aqua.model.pipeline.transformer.Convert;
-import elements.aqua.model.pipeline.transformer.Filter;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Pipeline<I> {
+public class SimplePipeline<I> {
 
     private final InitialState<I> initialState;
     private final ITerminal<I> terminalState;
 
     private final List<Signature> sequence = new ArrayList<>();
     private final Map<Integer, Filter<I>> filters = new HashMap<>();
-    private final Map<Integer, Convert<I>> convertors = new HashMap<>();
+    private final Map<Integer, Transform<I, I>> convertors = new HashMap<>();
 
     private boolean executionComplete = false;
 
-    private Pipeline(InitialState<I> initialState, ITerminal<I> terminalState) {
+    private SimplePipeline(InitialState<I> initialState, ITerminal<I> terminalState) {
        this.initialState = initialState;
        this.terminalState = terminalState;
     }
 
-    public static <F, T extends InitialState<F>, H extends ITerminal<F>> Pipeline<F> create(
+    public static <F, T extends InitialState<F>, H extends ITerminal<F>> SimplePipeline<F> create(
             T initialState,
             H terminalState) {
 
-        return new Pipeline<>(initialState, terminalState);
+        return new SimplePipeline<>(initialState, terminalState);
     }
 
     public <F extends Filter<I>> void nextLink(F obj2) {
@@ -38,13 +40,13 @@ public class Pipeline<I> {
         filters.put(signature.hashCode, obj2);
     }
 
-    public <F extends Convert<I>> void nextLink(F obj2) {
+    public <F extends Transform<I, I>> void nextLink(F obj2) {
         Signature signature = new Signature(obj2.type(), obj2.hashCode());
         sequence.add(signature);
         convertors.put(signature.hashCode, obj2);
     }
 
-    public synchronized void execute() throws IOException {
+    public synchronized void execute() {
 
         if (executionComplete) throw new IllegalStateException("Pipeline already executed");
 
@@ -61,8 +63,8 @@ public class Pipeline<I> {
                             break;
                         }
                         matched = true;
-                    } else if (signature.type == IModel.Type.CONVERTOR) {
-                        Convert<I> convertor = convertors.get(signature.hashCode);
+                    } else if (signature.type == IModel.Type.TRANSFORM) {
+                        Transform<I, I> convertor = convertors.get(signature.hashCode);
                         obj = convertor.convert(obj);
                     }
                 }
